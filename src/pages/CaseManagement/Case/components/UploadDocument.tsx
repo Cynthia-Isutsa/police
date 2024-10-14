@@ -64,7 +64,7 @@ export default function UploadModal({
       >
 
         <div style={{ display: 'flex', flexDirection: 'column', paddingLeft: 15 }}>
-          <Text>{currentLead?.caseType ?? ''}</Text>
+          <Title level={4}>{`${currentLead?.caseType} - ${currentLead?.incidentDateTime} `}</Title>
         </div>
       </div>
 

@@ -5,6 +5,7 @@ import { parse } from 'url';
 
 const caseListDataSource = [
   {
+    id: 1,
     obNumber: "G817",
     incidentDateTime: "2024-10-01 14:30",
     station: "Central Police Station",
@@ -19,6 +20,7 @@ const caseListDataSource = [
     description: "A group of three individuals robbed a shop at the Central Market. Witnesses have identified the suspects."
   },
   {
+    id: 2,
     obNumber: "K3872",
     incidentDateTime: "2024-10-02 11:15",
     station: "Kamukunji Police Station",
@@ -33,6 +35,7 @@ const caseListDataSource = [
     description: "A physical altercation between two individuals escalated, leading to one being hospitalized."
   },
   {
+    id: 3,
     obNumber: "G5161",
     incidentDateTime: "2024-09-30 03:00",
     station: "Industrial Area Police Station",
@@ -47,6 +50,7 @@ const caseListDataSource = [
     description: "A warehouse was broken into during the night, and electronics worth over $10,000 were stolen."
   },
   {
+    id: 4,
     obNumber: "K5267",
     incidentDateTime: "2024-10-03 08:45",
     station: "Traffic Police Station",
@@ -61,6 +65,7 @@ const caseListDataSource = [
     description: "A public vehicle was caught speeding and ignoring traffic lights at a major intersection."
   },
   {
+    id: 5,
     obNumber: "G8923",
     incidentDateTime: "2024-09-29 21:30",
     station: "Muthaiga Police Station",
@@ -75,6 +80,7 @@ const caseListDataSource = [
     description: "A domestic dispute between a couple resulted in injuries to both parties."
   },
   {
+    id: 6,
     obNumber: "G6127",
     incidentDateTime: "2024-09-28 16:00",
     station: "Nairobi Central Station",
@@ -89,6 +95,7 @@ const caseListDataSource = [
     description: "A suspect was caught with illegal narcotics at a checkpoint. The drugs were hidden inside a vehicle."
   },
   {
+    id: 7,
     obNumber: "G72378",
     incidentDateTime: "2024-10-04 18:10",
     station: "Westlands Police Station",
@@ -103,6 +110,7 @@ const caseListDataSource = [
     description: "A pedestrian was hit by a speeding car, and the driver fled the scene without providing assistance."
   },
   {
+    id: 8,
     obNumber: "K78237",
     incidentDateTime: "2024-09-25 12:00",
     station: "Lang'ata Police Station",

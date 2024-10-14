@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Card, Col, ConfigProvider, Row, Spin, Tag } from 'antd';
-import { ProTable } from '@ant-design/pro-components';
+import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { useNavigate, useRequest } from '@umijs/max';
-import AddCase from './components/AddCase';
 import { getFakeCases } from './service';
 import { EyeOutlined } from '@ant-design/icons';
 import enUS from 'antd/es/locale/en_US';
@@ -10,25 +9,18 @@ import enUS from 'antd/es/locale/en_US';
 
 const Case = () => {
   const { loading, data  } = useRequest<any>(getFakeCases);
-  const [modalVisible, setModalVisible] = useState(false);
   const navigate = useNavigate();
 
-  const showModal = () => {
-    setModalVisible(true);
-  };
-
-  const handleCancel = () => {
-    setModalVisible(false);
-  };
-
-  const handleCreate = () => {
-    setModalVisible(false);
-  };
+ 
 
   const handleView = (record: any) => {
+    console.log('Viewing case:', record);
     navigate(`/case-management/case-list/${record.id}`, { state: { record } });
   };
 
+  const handleNewCase = () => {
+    navigate('/case-management/case-list/new');
+  };
   const columns = [
     {
       title: 'OB Number',
@@ -137,14 +129,19 @@ const Case = () => {
   
 
   return (
-    <div>
+  
+      <PageContainer
+    title={`Case List`}
+    //breadcrumbRender={false}
+    //onBack={() => history.back()}
+    >
       <Row>
         <Col span={24}>
           <Card
             title={
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span>Case List</span>
-                <Button key="create" type="primary" onClick={showModal}>
+                <span></span>
+                <Button key="create" type="primary" onClick={handleNewCase}>
                   Record New Case
                 </Button>
               </div>
@@ -155,6 +152,7 @@ const Case = () => {
             ) : (
               <ConfigProvider locale={enUS}>
               <ProTable
+              toolBarRender={false}
                 columns={columns}
                 dataSource={data}
                 rowKey="id"
@@ -166,15 +164,11 @@ const Case = () => {
               />
               </ConfigProvider>
             )}
-            <AddCase
-              visible={modalVisible}
-              onCancel={handleCancel}
-              onCreate={handleCreate}
-            />
+          
           </Card>
         </Col>
       </Row>
-    </div>
+    </PageContainer>
   );
 };
 

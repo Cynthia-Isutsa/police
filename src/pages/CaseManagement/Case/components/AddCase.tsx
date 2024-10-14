@@ -1,46 +1,67 @@
 import React from 'react';
-import { Modal, Button } from 'antd';
+import { Button, message } from 'antd';
 import { ProForm, ProFormText, ProFormSelect, ProFormTextArea, ProFormDateTimePicker } from '@ant-design/pro-form';
-import { ProFormGroup } from '@ant-design/pro-components';
+import { PageContainer, ProFormGroup } from '@ant-design/pro-components';
+import { useNavigate } from '@umijs/max';
 
-const AddCase = ({ visible, onCancel, onCreate }: any) => {
+const AddCase = () => {
+const navigate = useNavigate();
+
+  const handleSubmit = (values: any) => {
+    // Handle form submission logic here
+    console.log('Form values:', values);
+    message.success('Case added successfully!');
+    navigate('/case-management/case-list');
+  };
+
+  const policeChiefs = [
+    { id: 1, name: "Bernard Hinga" },
+    { id: 2, name: "Ben Gethi" },
+    { id: 3, name: "Bernard Njinu" },
+    { id: 4, name: "Phillip Kilonzo" },
+    { id: 5, name: "Shedrack Kiruki" },
+    { id: 6, name: "Duncan Wachira" },
+    { id: 7, name: "Philemon Abong’o" },
+    { id: 8, name: "Edwin Nyaseda" },
+    { id: 9, name: "Major General Mohammed Hussein Ali" },
+    { id: 10, name: "Mathew Kirai Iteere" },
+    { id: 11, name: "Grace Kaindi" },
+    { id: 12, name: "Joel Kitili" },
+    { id: 13, name: "Edward N. Mbugua" }
+  ];
+
   return (
-    <Modal
-      title="Record Case"
-      visible={visible}
-      width={1000}
-      onCancel={onCancel}
-      footer={[
-        <Button key="back" onClick={onCancel}>
-          Close
-        </Button>,
-        <Button key="submit" type="primary" onClick={onCreate}>
-          Save changes
-        </Button>,
-      ]}
+    <PageContainer
+    title={`Add Case`}
+    //breadcrumbRender={false}
+    onBack={() => history.back()}
     >
       <ProForm
-      submitter={{
-        resetButtonProps: { style: { display: 'none' } },  // Hide reset button
-        submitButtonProps: { style: { display: 'none' } }, // Hide submit button
-      }}
+        onFinish={handleSubmit}
+        submitter={{
+          searchConfig: { submitText: 'Save Changes' },
+          resetButtonProps: { style: { display: 'none' } },  // Hide reset button
+        }}
       >
         <ProFormGroup>
           <ProFormText 
             name="obNumber" 
             label="OB Number" 
             placeholder="Enter OB Number" 
+            width="md"
             rules={[{ required: true, message: 'Please enter OB number!' }]}
           />
           <ProFormDateTimePicker 
             name="incidentDateTime" 
             label="Incident Date & Time" 
+            width="md"
             placeholder="Select date & time" 
             rules={[{ required: true, message: 'Please select the date and time of the incident!' }]}
           />
           <ProFormSelect 
             name="station" 
             label="Station" 
+            width="md"
             placeholder="Select Station"
             options={[
               { value: 'Kasarani Police Station', label: 'Kasarani Police Station' },
@@ -55,18 +76,21 @@ const AddCase = ({ visible, onCancel, onCreate }: any) => {
           <ProFormText 
             name="complainantName" 
             label="Complainant Name" 
+            width="md"
             placeholder="Enter complainant's name" 
             rules={[{ required: true, message: 'Please enter complainant name!' }]}
           />
           <ProFormText 
             name="complainantIdNumber" 
             label="Complainant ID Number" 
+            width="md"
             placeholder="Enter complainant ID" 
             rules={[{ required: true, message: 'Please enter complainant ID number!' }]}
           />
           <ProFormText 
             name="complainantPhoneNumber" 
-            label="Complainant Phone Number" 
+            label="Complainant Phone Number"
+            width="md" 
             placeholder="Enter phone number" 
             rules={[{ required: true, message: 'Please enter complainant phone number!' }]}
           />
@@ -76,11 +100,13 @@ const AddCase = ({ visible, onCancel, onCreate }: any) => {
           <ProFormText 
             name="respondentsIdNumber" 
             label="Respondent's ID Number" 
+            width="md"
             placeholder="Enter respondent's ID number" 
             rules={[{ required: true, message: 'Please enter respondent ID number!' }]}
           />
           <ProFormText 
-            name="primaryPhoneNumber" 
+            name="primaryPhoneNumber"
+            width="md" 
             label="Respondent's Phone Number" 
             placeholder="Enter phone number" 
             rules={[{ required: true, message: 'Please enter phone number!' }]}
@@ -88,6 +114,7 @@ const AddCase = ({ visible, onCancel, onCreate }: any) => {
           <ProFormSelect 
             name="caseType" 
             label="Case Type" 
+              width="md"
             placeholder="Select case type" 
             options={[
               { value: 'robbery', label: 'Robbery' },
@@ -96,12 +123,14 @@ const AddCase = ({ visible, onCancel, onCreate }: any) => {
             ]}
             rules={[{ required: true, message: 'Please select case type!' }]}
           />
+
         </ProFormGroup>
 
         <ProFormGroup>
           <ProFormSelect 
             name="severity" 
             label="Case Severity" 
+            width="md"
             placeholder="Select severity" 
             options={[
               { value: 'low', label: 'Low' },
@@ -112,7 +141,8 @@ const AddCase = ({ visible, onCancel, onCreate }: any) => {
           />
           <ProFormSelect 
             name="caseStatus" 
-            label="Case Status" 
+            label="Case Status"
+            width="md" 
             placeholder="Select case status" 
             options={[
               { value: 'open', label: 'Open' },
@@ -121,16 +151,35 @@ const AddCase = ({ visible, onCancel, onCreate }: any) => {
             ]}
             rules={[{ required: true, message: 'Please select case status!' }]}
           />
+          <ProFormSelect
+        name="investigatingOfficer"
+        label="Investigating Officer"
+        width="md"
+        placeholder="Select investigating officer"
+        rules={[{ required: true, message: 'Please select an investigating officer!' }]}
+
+        options={policeChiefs.map((chief) => ({
+          label: chief.name,
+          value: chief.id
+        }))}
+      />
         </ProFormGroup>
 
-        <ProFormTextArea 
-          name="description" 
-          label="Description" 
-          placeholder="Enter case description" 
-          rules={[{ required: true, message: 'Please enter a description!' }]}
-        />
+        <ProFormTextArea
+  name="description"
+  label=" Case Description"
+  placeholder="Enter case description"
+  fieldProps={{
+    style: {
+      height: 100, 
+      width: '70%', 
+    },
+  }}
+  rules={[{ required: true, message: 'Please enter a description!' }]}
+/>
+
       </ProForm>
-    </Modal>
+      </PageContainer>
   );
 };
 

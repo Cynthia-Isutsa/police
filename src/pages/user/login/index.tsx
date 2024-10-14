@@ -6,7 +6,7 @@ import Title from 'antd/es/typography/Title';
 import React, { useRef } from 'react';
 import kenya from '../../../../public/kenya.png';
 import { useNavigate } from 'react-router';
-import { login } from '@/services/ant-design-pro/api'; // Assuming the same service function is used
+import { login } from '@/services/ant-design-pro/api'; 
 
 const Login = () => {
   const [loading, setLoading] = React.useState<boolean>(false);

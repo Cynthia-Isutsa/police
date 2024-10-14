@@ -56,7 +56,7 @@ export default [
         name: 'analysis',
         icon: 'smile',
         path: '/dashboard/analysis',
-        component: './dashboard/analysis',
+        component: './CaseDashboard',
       },
     
     ],
@@ -77,12 +77,27 @@ export default [
         component: './CaseManagement/Case',
       },
       {
+        name: 'New Case',
+        icon: 'smile',
+        path: '/case-management/case-list/new',
+        component: './CaseManagement/Case/components/AddCase',
+        hideInMenu: true,
+      },
+      {
         name: 'ViewCase',
         icon: 'smile',
         path: '/case-management/case-list/:id',
-        component: './CaseManagement/Case/components/ViewCase',
+        component: './CaseManagement/Case/views',
         hideInMenu: true,
       },
+      {
+        name: 'add-witness',
+        icon: 'smile',
+        path: '/case-management/case-list/:id/add-witness',
+        component: './CaseManagement/Case/components/AddWitnesses',
+        hideInMenu: true,
+      },
+      
       
       {
         name: 'Metadata',
